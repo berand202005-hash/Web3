@@ -1,0 +1,38 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+.pnp
+.pnp.js
+
+# Build and deployment outputs
+.next/
+out/
+dist/
+build/
+bin/
+obj/
+
+# Solidity / Foundry outputs
+contracts/out/
+contracts/cache/
+my-web3-monorepo/contracts/out/
+my-web3-monorepo/contracts/cache/
+
+# Local env / secret files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db

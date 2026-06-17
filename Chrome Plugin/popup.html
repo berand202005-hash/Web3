@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>StreamRec AI Popup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <div class="popup-container">
+      
+      <!-- Header -->
+      <header class="app-header">
+        <div class="brand">
+          <div class="brand-dot-outer">
+            <div class="brand-dot"></div>
+          </div>
+          <h1>StreamRec <span class="ai-badge">AI</span></h1>
+        </div>
+        <div id="ollama-status" class="status-badge disconnected">
+          <span class="status-indicator"></span>
+          <span class="status-text">Ollama Offline</span>
+        </div>
+      </header>
+
+      <!-- Main Config Screen (shown when Idle) -->
+      <div id="config-panel" class="panel active">
+        <!-- Recording Mode Segmented Control -->
+        <div class="form-group">
+          <label>Capture Mode</label>
+          <div class="segmented-control">
+            <button id="mode-tab" class="control-btn" data-mode="tab">Active Tab</button>
+            <button id="mode-region" class="control-btn active" data-mode="region">Selected Region</button>
+            <button id="mode-screen" class="control-btn" data-mode="screen">Screen / Window</button>
+          </div>
+        </div>
+
+        <!-- Settings Row -->
+        <div class="settings-row">
+          <div class="form-group half">
+            <label for="quality-select">Quality</label>
+            <select id="quality-select" class="styled-select">
+              <option value="1080p">1080p (60fps)</option>
+              <option value="720p" selected>720p (30fps)</option>
+              <option value="480p">480p (30fps)</option>
+            </select>
+          </div>
+
+          <div class="form-group half">
+            <label for="auto-resume-input">Auto Resume (min)</label>
+            <input type="number" id="auto-resume-input" class="styled-input" value="5" min="1" max="60">
+          </div>
+        </div>
+
+        <!-- Output Format Selector -->
+        <div class="form-group">
+          <label>Output Format</label>
+          <div class="segmented-control">
+            <button id="format-mp4" class="control-btn active" data-format="mp4">MP4 (Default)</button>
+            <button id="format-mkv" class="control-btn" data-format="mkv">MKV</button>
+          </div>
+        </div>
+
+        <!-- Microphone Toggle -->
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Include Microphone</span>
+            <span class="toggle-desc">Record mic as a separate track</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="mic-toggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <!-- Ollama Model selector -->
+        <div id="ollama-model-group" class="form-group" style="display: none;">
+          <label for="model-select">Local AI Model (Ollama)</label>
+          <select id="model-select" class="styled-select">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <!-- Big Record Trigger -->
+        <button id="btn-start" class="btn btn-record">
+          <span class="btn-icon"></span>
+          Start Recording
+        </button>
+      </div>
+
+      <!-- Recording Active Screen (shown when Recording/Paused) -->
+      <div id="recording-panel" class="panel">
+        <div class="rec-display">
+          <div class="recording-indicator">
+            <span class="recording-pulse"></span>
+            <span id="recording-state-label">Recording...</span>
+          </div>
+          <div id="timer-display" class="timer">00:00:00</div>
+        </div>
+
+        <!-- Controls Row -->
+        <div class="controls-row">
+          <button id="btn-pause" class="btn btn-secondary">
+            <svg class="control-svg" viewBox="0 0 24 24">
+              <path id="pause-svg-path" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor"/>
+            </svg>
+            <span id="pause-btn-text">Pause</span>
+          </button>
+          <button id="btn-stop" class="btn btn-primary">
+            <svg class="control-svg" viewBox="0 0 24 24">
+              <path d="M6 6h12v12H6z" fill="currentColor"/>
+            </svg>
+            Stop
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Links -->
+      <footer class="app-footer">
+        <a href="#" id="link-dashboard" class="footer-link">
+          <svg class="footer-icon" viewBox="0 0 24 24">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="currentColor"/>
+          </svg>
+          Open Gallery & AI Dashboard
+        </a>
+      </footer>
+
+    </div>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

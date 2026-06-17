@@ -1,0 +1,15 @@
+# Antigravity Rules for Chrome Extension Development & AI Integration
+
+## Chrome Extension Guidelines (Manifest V3)
+- Use Manifest V3 standard APIs exclusively.
+- Use the `chrome.offscreen` API for DOM-dependent background operations (such as `MediaRecorder`, Web Audio API, and audio stream routing).
+- Ensure permissions in `manifest.json` are strictly minimized and correspond only to active features (`tabCapture`, `desktopCapture`, `offscreen`, `storage`, `alarms`, `tabs`, `activeTab`).
+- Store video and audio blobs in **IndexedDB** using a Promise-based wrapper, avoiding the size limits of `chrome.storage.local`.
+- Style all web assets (popup, dashboard) with high-end glassmorphic dark-theme design, smooth transition animations, and Inter/Outfit typography.
+
+## Local Ollama MCP Server Integration
+- **Maximizing Ollama MCP Usage**: Always maximize the use of the `local-ollama-bridge` MCP server to interact with and check local Ollama instances during development.
+  - Use `list_models` to check which models are pulled and available on the user's system (e.g., Llama 3, Phi-3).
+  - Use `show_model` to verify parameters or limitations of a model if needed.
+  - Use `ask_model` to test prompts or generate structured JSON payloads during coding and debugging.
+- In application code, ensure Ollama API calls point to the local instance (`http://localhost:11434`) and query the tags endpoint to fetch the user's local models.

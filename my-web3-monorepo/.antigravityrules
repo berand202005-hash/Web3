@@ -1,0 +1,18 @@
+# Web3 Fullstack Development Rules
+
+## 1. Stack & Architecture Definitions
+- Frontend: Next.js (App Router), TypeScript, TailwindCSS
+- Web3 Interaction: Wagmi v2, Viem, RainbowKit
+- Smart Contracts: Solidity (Latest stable), Foundry Framework (prefer over Hardhat)
+
+## 2. Agent Workflow Roles & Engine Routing
+- ARCHITECTURE & FRONTEND (Cloud Brain): Use primary Antigravity agents for cross-file architecture, multi-hook setups, and UI design matching.
+- DATA CRUNCHING & LOCAL TASKS (Ollama Brain): Delegate repetitive boilerplate generation, heavy transaction log parsing, and raw JSON ABI parsing to local Ollama MCP tools (`qwen2.5-coder`).
+
+## 3. Smart Contract Protocol (Strict)
+- TESTING: Write all smart contract edge cases and invariant testing in Solidity using Foundry (`forge test`). Never write raw JS/TS tests for smart contracts unless explicitly asked.
+- SECURITY: Actively check for reentrancy, integer overflows (if pre-0.8), and flash-loan vulnerabilities. Leverage the local Ollama model to run sanity audits on compiling code before concluding tasks.
+- GAS OPTIMIZATION: Prioritize custom errors over revert strings, optimize variable packing (slots), and utilize efficient iteration loops.
+
+## 4. Execution Guardrails
+- Always execute terminal commands with flags that bypass interactive prompts (e.g., `forge init --no-git`).

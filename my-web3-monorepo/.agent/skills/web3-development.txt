@@ -1,0 +1,3 @@
+- STACK: Next.js (App Router), TypeScript, TailwindCSS, Wagmi v2, Viem, Foundry Framework.
+- TESTING: Write all smart contract edge cases and invariant testing in Solidity using Foundry (`forge test`).
+- ENGINE ROUTING: Use cloud agents for frontend architecture. Delegate heavy data crunching (like JSON ABI parsing) to local Ollama MCP tools (`qwen2.5-coder`).

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veloce Video Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo-area">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 12H16L12 16L8 12H11V8H13V12Z" fill="url(#logo-grad)"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00f2fe"/>
+              <stop offset="1" stop-color="#4facfe"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="logo-text">
+          <h1>Veloce</h1>
+          <span class="subtitle">Video Downloader</span>
+        </div>
+      </div>
+      <button id="rescan-btn" class="icon-btn" title="Rescan page">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="app-content">
+      <div id="status-badge" class="status-badge hidden">Scanning...</div>
+      
+      <!-- Discovered videos will populate here -->
+      <div id="video-list" class="video-list"></div>
+
+      <!-- Loading skeleton / spinner -->
+      <div id="loading-state" class="loading-state">
+        <div class="spinner"></div>
+        <p>Scanning page for media elements...</p>
+      </div>
+
+      <!-- Empty/No Videos State -->
+      <div id="empty-state" class="empty-state hidden">
+        <div class="empty-illustration">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+            <line x1="7" y1="2" x2="7" y2="22"/>
+            <line x1="17" y1="2" x2="17" y2="22"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <line x1="2" y1="7" x2="7" y2="7"/>
+            <line x1="2" y1="17" x2="7" y2="17"/>
+            <line x1="17" y1="17" x2="22" y2="17"/>
+            <line x1="17" y1="7" x2="22" y2="7"/>
+          </svg>
+        </div>
+        <h3>No Videos Detected</h3>
+        <p>Try playing the video first, or reload the page and scan again.</p>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <p>💡 Tip: DRM streams & YouTube embeds cannot be downloaded directly.</p>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>StreamRec AI - Recordings Gallery & Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <script type="module" src="dashboard.js"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      
+      <!-- Top Navigation -->
+      <header class="app-nav">
+        <div class="nav-brand">
+          <div class="brand-logo">
+            <div class="logo-dot-outer">
+              <div class="logo-dot"></div>
+            </div>
+          </div>
+          <h1>StreamRec <span class="nav-badge">AI Dashboard</span></h1>
+        </div>
+        <div class="nav-actions">
+          <div id="ollama-status-indicator" class="ollama-badge disconnected">
+            <span class="indicator-dot"></span>
+            <span id="ollama-status-text">Ollama Offline</span>
+          </div>
+          <button id="btn-refresh-gallery" class="nav-btn">
+            Refresh Gallery
+          </button>
+        </div>
+      </header>
+
+      <div class="main-layout">
+        
+        <!-- Left Column: Gallery List -->
+        <aside class="sidebar-panel">
+          <div class="panel-header">
+            <h2>Saved Recordings</h2>
+            <input type="text" id="search-input" placeholder="Search by title, url..." class="search-bar">
+          </div>
+          <div id="recordings-list" class="recordings-list">
+            <!-- Dynamically populated -->
+            <div class="empty-state">
+              <p>No recordings found</p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Center Column: Video Player -->
+        <main class="viewer-panel">
+          <div id="active-viewer" class="viewer-content" style="display: none;">
+            
+            <!-- Video Metadata Info -->
+            <div class="video-meta">
+              <h2 id="video-display-title">Recording Title</h2>
+              <div class="meta-tags">
+                <span id="meta-date" class="meta-tag">Date</span>
+                <span id="meta-duration" class="meta-tag">00:00</span>
+                <span id="meta-size" class="meta-tag">0.0 MB</span>
+                <a href="#" id="meta-url" target="_blank" class="meta-tag url-link">Original Tab</a>
+              </div>
+            </div>
+
+            <!-- Video Player Wrap -->
+            <div class="player-container">
+              <video id="main-video" controls class="video-element"></video>
+              <!-- Hidden separate microphone audio element -->
+              <audio id="mic-audio"></audio>
+            </div>
+
+            <!-- Audio Mixer Panel (Shows when Mic track is present) -->
+            <div id="mixer-panel" class="mixer-panel" style="display: none;">
+              <h3>Audio Mixer</h3>
+              <div class="mixer-grids">
+                <div class="mixer-slider">
+                  <label for="volume-video">Video Sound (Tab)</label>
+                  <input type="range" id="volume-video" min="0" max="1" step="0.05" value="1">
+                </div>
+                <div class="mixer-slider">
+                  <label for="volume-mic">Microphone Narration</label>
+                  <input type="range" id="volume-mic" min="0" max="1" step="0.05" value="1">
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions Panel -->
+            <div class="video-actions">
+              <div class="action-buttons">
+                <button id="btn-download-video" class="action-btn btn-dl-video">
+                  Download MKV Video
+                </button>
+                <button id="btn-download-mic" class="action-btn btn-dl-audio" style="display: none;">
+                  Download Mic Track
+                </button>
+              </div>
+
+              <div class="danger-zone">
+                <input type="text" id="rename-input" placeholder="Rename recording..." class="rename-box">
+                <button id="btn-delete" class="action-btn btn-del">Delete</button>
+              </div>
+            </div>
+
+          </div>
+
+          <div id="no-active-viewer" class="viewer-empty">
+            <div class="empty-display">
+              <svg class="empty-icon" viewBox="0 0 24 24">
+                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 16H6v-8h8v8z" fill="currentColor"/>
+              </svg>
+              <h3>No Recording Selected</h3>
+              <p>Select a video from the sidebar list to play it, view AI summaries, and chat.</p>
+            </div>
+          </div>
+        </main>
+
+        <!-- Right Column: Ollama AI Panel -->
+        <section class="ai-panel">
+          <div class="panel-header">
+            <h2>Ollama AI Assistant</h2>
+            <div class="model-badge-container">
+              <select id="chat-model-select" class="chat-model-dropdown">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div class="ai-content">
+            
+            <!-- AI Notes / Summary Block -->
+            <div class="ai-block">
+              <h3>AI Page Summary</h3>
+              <div id="ai-summary-text" class="ai-summary-box">
+                Select a recording to view its AI-generated summary notes.
+              </div>
+            </div>
+
+            <!-- AI Interactive Chat -->
+            <div class="chat-block">
+              <h3>Chat with Recording Context</h3>
+              <div id="chat-messages" class="chat-messages">
+                <!-- Messages populated dynamically -->
+                <div class="system-chat-message">
+                  Select a recording to begin chatting with Ollama about its content.
+                </div>
+              </div>
+
+              <!-- Input Area -->
+              <div class="chat-input-area">
+                <textarea id="chat-input" placeholder="Ask Ollama about this session..." disabled></textarea>
+                <button id="btn-send-chat" class="chat-send-btn" disabled>
+                  <svg viewBox="0 0 24 24" class="send-icon">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </body>
+</html>
